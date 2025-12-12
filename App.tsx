@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import PropertyForm from './components/PropertyForm';
 import AnalysisResult from './components/AnalysisResult';
+import LoginScreen from './components/LoginScreen';
 import { analyzeProperty } from './services/geminiService';
 import { PropertyFormData, AnalysisResponse, AppState } from './types';
 import { LayoutDashboard } from 'lucide-react';
 
 const App: React.FC = () => {
-  const [appState, setAppState] = useState<AppState>(AppState.FORM);
+  // Initialize state with LOGIN
+  const [appState, setAppState] = useState<AppState>(AppState.LOGIN);
   const [result, setResult] = useState<AnalysisResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Mock Login Handler
+  const handleLogin = () => {
+    // In the future, real Google Auth logic goes here
+    setAppState(AppState.FORM);
+  };
 
   const handleFormSubmit = async (data: PropertyFormData) => {
     setAppState(AppState.LOADING);
@@ -30,14 +38,20 @@ const App: React.FC = () => {
     setError(null);
   };
 
+  // Render Login Screen independently
+  if (appState === AppState.LOGIN) {
+    return <LoginScreen onLogin={handleLogin} />;
+  }
+
+  // Render Main App (Layout with Header)
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
-      {/* Header */}
+      {/* Header - Only visible after login */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 text-blue-900">
             <LayoutDashboard className="w-6 h-6" />
-            <h1 className="text-xl font-extrabold tracking-tight">AvalIA - Imóveis</h1>
+            <h1 className="text-xl font-bold tracking-tight font-['Playfair_Display']">AvalIA AI - Imóveis</h1>
           </div>
           <span className="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded">BETA</span>
         </div>
@@ -61,7 +75,7 @@ const App: React.FC = () => {
               <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
               <h3 className="text-lg font-medium text-gray-600">Consultando bases de dados...</h3>
               <p className="text-sm text-gray-400 text-center max-w-xs">
-                O AvalIA está comparando o imóvel com ofertas no VivaReal, Zap e OLX.
+                O AvalIA AI está comparando o imóvel com ofertas no VivaReal, Zap e OLX.
               </p>
            </div>
         )}

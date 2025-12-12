@@ -32,6 +32,7 @@ export interface AnalysisResponse {
 }
 
 export enum AppState {
+  LOGIN = 'LOGIN',
   FORM = 'FORM',
   LOADING = 'LOADING',
   RESULT = 'RESULT',

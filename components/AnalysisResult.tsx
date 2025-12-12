@@ -12,7 +12,7 @@ const AnalysisResult: React.FC<AnalysisResultProps> = ({ data, onReset }) => {
 
   // Helper to format text for WhatsApp
   const generateWhatsAppText = () => {
-    const text = `*AvalIA - Análise de Mercado* 📊\n\n` +
+    const text = `*AvalIA AI - Análise de Mercado* 📊\n\n` +
       `*Análise:*\n${data.priceAnalysis}\n\n` +
       `*Recomendação para Conversa:*\n"${data.salesScripts[0]}"\n\n` +
       `_Gerado por Inteligência Artificial_`;
