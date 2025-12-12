@@ -8,7 +8,7 @@ interface LoginScreenProps {
 const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   return (
     <div className="min-h-screen bg-white flex flex-col justify-between relative overflow-hidden">
-      
+
       {/* Background Decor */}
       <div className="absolute top-[-10%] right-[-20%] w-[80%] h-[40%] bg-blue-100 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
       <div className="absolute bottom-[-10%] left-[-10%] w-[60%] h-[30%] bg-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
@@ -20,18 +20,18 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             <LayoutDashboard className="w-10 h-10 text-white" />
           </div>
         </div>
-        
+
         <h1 className="text-4xl text-center text-gray-900 mb-3 tracking-tight font-['Playfair_Display'] font-bold">
           AvalIA AI <span className="text-blue-600">Imóveis</span>
         </h1>
         <p className="text-center text-gray-500 text-lg leading-relaxed">
-          A Inteligência Artificial que atualiza corretores e proprietários com as melhores práticas.
+          A Inteligência Artificial que atualiza corretores e proprietários com análises em tempo real.
         </p>
       </div>
 
       {/* Value Proposition Cards */}
       <div className="px-6 space-y-6 z-10 flex-1 flex flex-col justify-center">
-        
+
         <div className="flex items-start gap-4">
           <div className="bg-green-100 p-2 rounded-lg shrink-0 mt-1">
             <TrendingUp className="w-5 h-5 text-green-700" />
@@ -97,7 +97,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
           <span className="group-hover:text-gray-900">Entrar com Google</span>
           <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-900 group-hover:translate-x-1 transition-all" />
         </button>
-        
+
         <p className="text-center text-xs text-gray-400 mt-4">
           Ao entrar, você concorda com os Termos de Uso e Privacidade.
         </p>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { PropertyFormData } from '../types';
-import { 
-  Building2, MapPin, Ruler, BedDouble, CheckCircle2, DollarSign, 
-  KeyRound, Tag, Car, Bath, Trees, Waves, Wind, Armchair, Home 
+import {
+  Building2, MapPin, Ruler, BedDouble, CheckCircle2, DollarSign,
+  KeyRound, Tag, Car, Bath, Trees, Waves, Wind, Armchair, Home
 } from 'lucide-react';
 
 interface PropertyFormProps {
@@ -32,15 +32,15 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, isLoading }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
-    
+
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked;
       setFormData(prev => ({ ...prev, [name]: checked }));
     } else {
       setFormData(prev => ({
         ...prev,
-        [name]: name === 'size' || name === 'rooms' || name === 'price' || name === 'garage' || name === 'suites' 
-          ? Number(value) 
+        [name]: name === 'size' || name === 'rooms' || name === 'price' || name === 'garage' || name === 'suites'
+          ? Number(value)
           : value,
       }));
     }
@@ -66,28 +66,26 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, isLoading }) => {
       </div>
 
       <form onSubmit={handleSubmit} className="p-6 space-y-5">
-        
+
         {/* Transaction Type Toggle */}
         <div className="flex bg-gray-100 p-1 rounded-lg">
           <button
             type="button"
             onClick={() => setTransactionType('venda')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 text-sm font-bold rounded-md transition-all ${
-              formData.transactionType === 'venda' 
-                ? 'bg-white text-blue-900 shadow-sm' 
+            className={`flex-1 flex items-center justify-center gap-2 py-2 text-sm font-bold rounded-md transition-all ${formData.transactionType === 'venda'
+                ? 'bg-white text-blue-900 shadow-sm'
                 : 'text-gray-500 hover:text-gray-700'
-            }`}
+              }`}
           >
             <Tag className="w-4 h-4" /> Venda
           </button>
           <button
             type="button"
             onClick={() => setTransactionType('aluguel')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 text-sm font-bold rounded-md transition-all ${
-              formData.transactionType === 'aluguel' 
-                ? 'bg-white text-blue-900 shadow-sm' 
+            className={`flex-1 flex items-center justify-center gap-2 py-2 text-sm font-bold rounded-md transition-all ${formData.transactionType === 'aluguel'
+                ? 'bg-white text-blue-900 shadow-sm'
                 : 'text-gray-500 hover:text-gray-700'
-            }`}
+              }`}
           >
             <KeyRound className="w-4 h-4" /> Locação
           </button>
@@ -119,12 +117,12 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, isLoading }) => {
 
         {/* Localização */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Bairro e Cidade</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">rua ou Bairro e Cidade</label>
           <div className="relative">
             <input
               type="text"
               name="location"
-              placeholder="Ex: Vila Mariana, São Paulo"
+              placeholder="Ex: rua ou bairro, cidade"
               required
               value={formData.location}
               onChange={handleChange}
@@ -286,9 +284,8 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, isLoading }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full mt-2 py-4 rounded-lg font-bold text-white shadow-lg transition-all transform hover:scale-[1.02] active:scale-[0.98] ${
-            isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-          }`}
+          className={`w-full mt-2 py-4 rounded-lg font-bold text-white shadow-lg transition-all transform hover:scale-[1.02] active:scale-[0.98] ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+            }`}
         >
           {isLoading ? (
             <span className="flex items-center justify-center gap-2">
