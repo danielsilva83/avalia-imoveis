@@ -53,7 +53,19 @@ const parseResponse = (text: string): AnalysisResponse => {
       
       if (start !== -1 && end !== -1) {
          const cleanJson = jsonText.substring(start, end + 1);
-         result.crmData = JSON.parse(cleanJson);
+         try {
+            result.crmData = JSON.parse(cleanJson);
+         } catch (jsonError) {
+            console.warn("JSON parsing failed. Attempting cleanup...", jsonError);
+            // Fallback: Try to replace single quotes with double quotes for keys if simple mismatch
+            // This is a naive fix for { 'key': 'value' } style commonly returned by LLMs
+            try {
+              const fixedJson = cleanJson.replace(/'/g, '"');
+              result.crmData = JSON.parse(fixedJson);
+            } catch (e) {
+               console.error("Failed to recover JSON:", cleanJson);
+            }
+         }
       }
     }
   } catch (error) {
@@ -142,9 +154,16 @@ export const analyzeProperty = async (data: PropertyFormData): Promise<AnalysisR
 
     [[SEÇÃO 4]]
     CRM Data (JSON).
-    - Gere um objeto JSON válido contendo: {resumo_imovel, faixa_preco_sugerida, nivel_dificuldade_venda, tags_sugeridas}.
-    - Nota: O campo 'nivel_dificuldade_venda' deve refletir a dificuldade de locação se for aluguel.
-    - NÃO use blocos de código markdown. Apenas o objeto JSON cru.
+    - Gere um objeto JSON válido seguindo estritamente a sintaxe JSON (RFC 8259).
+    - IMPORTANTE: Use aspas duplas ("") para todas as chaves e valores string.
+    - Exemplo de estrutura:
+    {
+      "resumo_imovel": "Texto resumido...",
+      "faixa_preco_sugerida": "R$ X - R$ Y",
+      "nivel_dificuldade_venda": "Alto/Médio/Baixo",
+      "tags_sugeridas": ["Tag1", "Tag2"]
+    }
+    - NÃO use blocos de código markdown. Retorne apenas o objeto JSON cru.
   `;
 
   try {
@@ -154,7 +173,7 @@ export const analyzeProperty = async (data: PropertyFormData): Promise<AnalysisR
       config: {
         systemInstruction: systemInstruction,
         tools: [{ googleSearch: {} }],
-        // responseMimeType: "application/json" REMOVED because it conflicts with googleSearch tool
+        // responseMimeType: "application/json" cannot be used with tools
         temperature: 0.7, 
       },
     });
