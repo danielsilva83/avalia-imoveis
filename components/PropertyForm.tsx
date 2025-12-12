@@ -162,7 +162,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, isLoading }) => {
                 name="rooms"
                 required
                 min="0"
-                value={formData.rooms || ''}
+                value={formData.rooms}
                 onChange={handleChange}
                 className="w-full p-3 pl-10 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
               />
@@ -179,7 +179,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, isLoading }) => {
                 name="suites"
                 required
                 min="0"
-                value={formData.suites || ''}
+                value={formData.suites}
                 onChange={handleChange}
                 className="w-full p-3 pl-10 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
               />
@@ -196,7 +196,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, isLoading }) => {
                 name="garage"
                 required
                 min="0"
-                value={formData.garage || ''}
+                value={formData.garage}
                 onChange={handleChange}
                 className="w-full p-3 pl-10 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
               />
@@ -252,8 +252,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({ onSubmit, isLoading }) => {
               <span className="text-sm text-gray-700">Quintal</span>
             </label>
             <label className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors">
-              <input type="checkbox" name="hasGarden" checked={formData.hasGarden} onChange={handleChange} className="w-4 h-4 text-blue-600 rounded" />
-              <Trees className="w-4 h-4 text-green-600" />
+              <input type="checkbox" name="hasGarden" checked={formData.hasGarden} onChange={handleChange} className="w-4 h-4 text-green-600 rounded" />
               <span className="text-sm text-gray-700">Jardim</span>
             </label>
             <label className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-100 transition-colors">
